@@ -1,82 +1,71 @@
-import Head from 'next/head'
-
+import { useState } from 'react'
 export default function Home() {
+  const [data, set_data] = useState([])
+  const CreateLocation = (event) => {
+    event.preventDefault()
+
+    const form_data = {
+      location: event.target.location.value,
+      minCustomers: event.target.min.value,
+      maxCustomers: event.target.max.value,
+      avgCookies: event.target.avg.value
+    }
+    set_data(() => [...data, form_data])
+  }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center flex-1 w-full px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <head>
+        <title>Cookie Stand Admin</title>
+      </head>
+      <main className='flex flex-col h-screen'>
+        <header
+          className='flex justify-between p-4'
+          style={{ backgroundColor: '#15B981' }}
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
+          <p className='text-2xl'>Cookie Stand Admin</p>
+        </header>
+        <form
+          className='p-2 mx-auto my-10 rounded-md'
+          style={{ backgroundColor: '#6FE6B7' }}
+          onSubmit={CreateLocation}
+        >
+          <h1 className='my-6 text-2xl text-center'>Create Cookie Stand</h1>
+          <div className='flex'>
+            <label className='mx-1'>Location</label>
+            <input name='location' className='flex-auto rounded-br-md' />
+          </div>
+          <div className='flex mx-auto my-5 text-sm'>
+            <div className='flex-col w-1/2 text-center'>
+              Minimum Customers per hour
+              <input type='number' name='min' className='rounded-br-md' />
+            </div>
+            <div className='flex-col w-1/2 text-center'>
+              Maximum Customers per hour
+              <input type='number' name='max' className='rounded-br-md' />
+            </div>
+            <div className='flex-col w-1/2 text-center'>
+              Average Cookies per Sale
+              <input type='number' name='avg' className='rounded-br-md' />
+            </div>
+            <button className='w-2/6' style={{ backgroundColor: '#15B981' }}>
+              Create
+            </button>
+          </div>
+        </form>
+        <p className='my-3 text-center text-gray-900'>
+          Report Table Coming Soon...
+        </p>
+        {data.length > 0
+          ? data.map((location) => (
+              <div className='my-5 text-center text-gray-900'>
+                {JSON.stringify(location)}
+              </div>
+            ))
+          : false}
+        <footer className='p-4' style={{ backgroundColor: '#15B981' }}>
+          &copy;2021 - Odeh Abuzaid
+        </footer>
+      </main>
+    </>
   )
 }
