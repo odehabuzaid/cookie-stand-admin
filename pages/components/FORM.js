@@ -1,11 +1,6 @@
 import { useState } from 'react'
 import LOC from './created/LOC'
 const MAIN = () => {
-  // useEffect(() => {
-  //   const ls_data =  JSON.parse(localStorage.getItem('Locations')) || [];
-  //   set_data(() => [...data, ls_data])
-  // }, [])
-
   const [data, set_data] = useState([])
   const CreateLocation = (event) => {
     event.preventDefault()
@@ -17,7 +12,6 @@ const MAIN = () => {
       avgCookies: event.target.avg.value
     }
     set_data(() => [...data, form_data])
-    // localStorage.setItem('Locations', JSON.stringify(...data) );
   }
 
   return (
