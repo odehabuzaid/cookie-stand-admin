@@ -1,6 +1,6 @@
 import { hours } from '../../../../data'
 
-const ReportTable = ({ data }) => {
+const ReportTable = ({ data, onDelete }) => {
   const hourly_sales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   const totals = []
   return (
@@ -23,14 +23,18 @@ const ReportTable = ({ data }) => {
                   <td>
                     <div>
                       <p>{stand.location}</p>
+                      <span onClick={() => onDelete(stand.id)}>[X]</span>
                     </div>
                   </td>
                   {hours.map((_, index) => {
                     const rnd =
                       Math.random() *
-                        (stand.maxCustomers - stand.minCustomers) +
+                        (stand.maximum_customers_per_hour -
+                          stand.minimum_customers_per_hour) +
                       1
-                    const salesPerHour = Math.ceil(rnd * stand.avgCookies)
+                    const salesPerHour = Math.ceil(
+                      rnd * stand.average_cookies_per_sale
+                    )
                     hourly_sales[index] = hourly_sales[index] + salesPerHour
                     if (index == hours.length - 1) {
                       totals[dIndex] = hourly_sales.reduce(

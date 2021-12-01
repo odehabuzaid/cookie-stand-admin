@@ -1,37 +1,24 @@
-import React, { useState } from 'react';
-import CreateForm from './CookieStandAdmin/CreateForm';
-import Footer from './CookieStandAdmin/Footer';
-import Header from './CookieStandAdmin/Header';
-import ReportTable from './CookieStandAdmin/report/ReportTable';
+import React from 'react'
+import CreateForm from './CookieStandAdmin/CreateForm'
+import Footer from './CookieStandAdmin/Footer'
+import Header from './CookieStandAdmin/Header'
+import ReportTable from './CookieStandAdmin/report/ReportTable'
 
-const CookieStandAdmin = () => {
-    
-    const [data, set_data] = useState([])
-    const CreateLocation = (event) => {
-      event.preventDefault()
-      
-      const form_data = {
-        location: event.target.location.value,
-        minCustomers: event.target.min.value,
-        maxCustomers: event.target.max.value,
-        avgCookies: event.target.avg.value
-      }
-      set_data(() => [...data, form_data])
-    }
-
-    return (
-        <>
-        <head>
-          <title>Cookie Stand Admin</title>
-        </head>
-        <main className='flex flex-col h-screen'>
-          <Header />
-          <CreateForm CreateLocation={CreateLocation} />
-          <ReportTable data={data}/>
-          <Footer data={data}/>
-        </main>
-      </>
-    );
+const CookieStandAdmin = ({ stands, loading, onCreate, onDelete }) => {
+  if (loading) return <p>Loading...</p>
+  return (
+    <>
+      <head>
+        <title>Cookie Stand Admin</title>
+      </head>
+      <main className='flex flex-col h-screen'>
+        <Header />
+        <CreateForm onCreate={onCreate} />
+        <ReportTable data={stands} onDelete={onDelete} />
+        <Footer data={stands} />
+      </main>
+    </>
+  )
 }
 
-export default CookieStandAdmin;
+export default CookieStandAdmin

@@ -1,8 +1,9 @@
 const Login = ({ login }) => {
   return (
-    <div class='h-screen text-center p-4'>
+    <div className='h-screen p-4 text-center'>
       <h2>Need to log in</h2>
       <input type='text' id='username' placeholder='Username' />
+      <br />
       <br />
       <input type='password' id='password' placeholder='password' />
       <br />
