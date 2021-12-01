@@ -1,6 +1,6 @@
 
 
-const CreateForm = ({CreateLocation,data}) => {
+const CreateForm = ({CreateLocation}) => {
   
   return (
     <>
@@ -25,7 +25,7 @@ const CreateForm = ({CreateLocation,data}) => {
           </div>
           <div className='flex-col w-1/2 text-center'>
             Average Cookies per Sale
-            <input type='number' name='avg' className='rounded-br-md' />
+            <input type='number'  step="any" name='avg' className='rounded-br-md' />
           </div>
           <button className='w-2/6' style={{ backgroundColor: '#15B981' }}>
             Create

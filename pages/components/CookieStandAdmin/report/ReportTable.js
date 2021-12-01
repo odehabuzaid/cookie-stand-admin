@@ -1,7 +1,8 @@
 import { hours } from '../../../../data'
 
 const ReportTable = ({ data }) => {
-  const hourly_sales = [48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36]
+  const hourly_sales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  const totals = []
   return (
     <>
       {data.length ? (
@@ -16,14 +17,35 @@ const ReportTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((stand, i) => {
+            {data.map((stand, dIndex) => {
               return (
-                <tr key={i}>
-                  <th>
+                <tr>
+                  <td>
                     <div>
                       <p>{stand.location}</p>
                     </div>
-                  </th>
+                  </td>
+                  {hours.map((_, index) => {
+                    const rnd =
+                      Math.random() *
+                        (stand.maxCustomers - stand.minCustomers) +
+                      1
+                    const salesPerHour = Math.ceil(rnd * stand.avgCookies)
+                    hourly_sales[index] = hourly_sales[index] + salesPerHour
+                    if (index == hours.length - 1) {
+                      totals[dIndex] = hourly_sales.reduce(
+                        (partial_sum, a) => partial_sum + a,
+                        0
+                      )
+                    }
+                    return <td>{salesPerHour}</td>
+                  })}
+                  <td>
+                    {hourly_sales.reduce(
+                      (partial_sum, a) => partial_sum + a,
+                      0
+                    )}
+                  </td>
                 </tr>
               )
             })}
@@ -34,7 +56,7 @@ const ReportTable = ({ data }) => {
               {hourly_sales.map((item, i) => {
                 return <td key={i}>{item}</td>
               })}
-              <td>0</td>
+              <td>{totals.reduce((partial_sum, a) => partial_sum + a, 0)}</td>
             </tr>
           </tfoot>
         </table>
