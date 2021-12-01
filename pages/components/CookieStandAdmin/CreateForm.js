@@ -1,19 +1,7 @@
-import { useState } from 'react'
-import LOC from './created/LOC'
-const MAIN = () => {
-  const [data, set_data] = useState([])
-  const CreateLocation = (event) => {
-    event.preventDefault()
 
-    const form_data = {
-      location: event.target.location.value,
-      minCustomers: event.target.min.value,
-      maxCustomers: event.target.max.value,
-      avgCookies: event.target.avg.value
-    }
-    set_data(() => [...data, form_data])
-  }
 
+const CreateForm = ({CreateLocation,data}) => {
+  
   return (
     <>
       <form
@@ -44,9 +32,9 @@ const MAIN = () => {
           </button>
         </div>
       </form>
-      <LOC data={data} />
+
     </>
   )
 }
 
-export default MAIN
+export default CreateForm

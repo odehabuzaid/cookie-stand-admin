@@ -1,12 +1,13 @@
-const FOOTER = () => {
+
+const Footer = ({data}) => {
   return (
     <footer
       className='p-4'
       style={{ backgroundColor: '#15B981' }}
     >
-      &copy;2021 - Odeh Abuzaid
+      <span>{`${data.length} locations world wild`}</span>
     </footer>
   )
 }
 
-export default FOOTER
+export default Footer
