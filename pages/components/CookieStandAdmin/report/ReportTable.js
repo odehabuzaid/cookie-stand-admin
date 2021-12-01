@@ -5,7 +5,7 @@ const ReportTable = ({ data }) => {
   const totals = []
   return (
     <>
-      {data.length ? (
+      {data ? (
         <table className='w-1/2 mx-auto my-4 divide-y divide-green-500'>
           <thead>
             <tr>
