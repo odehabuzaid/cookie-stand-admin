@@ -2,8 +2,8 @@ import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import { createContext, useContext, useState } from 'react'
 
-const baseUrl = 'https://cookie-stand-rest.herokuapp.com'
-const tokenUrl = baseUrl + '/api/token/'
+const baseUrl = process.env.NEXT_PUBLIC_AUTH_URL
+const tokenUrl = baseUrl
 
 const AuthContext = createContext()
 
