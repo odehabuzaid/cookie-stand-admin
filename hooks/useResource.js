@@ -1,14 +1,14 @@
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
 import useSWR from 'swr'
 import { useAuth } from '../contexts/authintication'
-
 export const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 export default function useResource() {
   const { tokens, logout } = useAuth()
-
-  const { data, error, mutate } = useSWR([apiUrl, tokens], fetchResource)
   
+  const { data, error, mutate } = useSWR([apiUrl, tokens], fetchResource)
+
   async function fetchResource(url) {
     if (!tokens) {
       return
@@ -18,7 +18,7 @@ export default function useResource() {
       const response = await axios.get(url, config())
 
       return response.data
-    } catch (error) {
+    } catch (err) {
       handleError(error)
     }
   }
@@ -27,7 +27,7 @@ export default function useResource() {
     try {
       await axios.post(apiUrl, info, config())
       mutate() // mutate causes complete collection to be refetched
-    } catch (error) {
+    } catch (err) {
       handleError(error)
     }
   }
@@ -37,7 +37,7 @@ export default function useResource() {
       const url = apiUrl + id
       await axios.delete(url, config())
       mutate() // mutate causes complete collection to be refetched
-    } catch (error) {
+    } catch (err) {
       handleError(error)
     }
   }
@@ -56,11 +56,13 @@ export default function useResource() {
     }
   }
 
-  function handleError(error) {
-    console.error(error)
-    // currently just log out on error
-    // but a common error will be short lived token expiring
-    // STRETCH: refresh the access token when it has expired
+  async function handleError(err) {
+    console.error(err)
+    if (err.messages[0].message == 'Token is invalid or expired') {
+      const ref = jwt.decode(tokens.refresh)
+      const response = await axios.post(tokenRefreshURL, { ref })
+      tokens.access = response.data.access
+    }
     logout()
   }
 
