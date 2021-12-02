@@ -1,25 +1,7 @@
-import { useState } from 'react'
-import LOC from './created/LOC'
-const MAIN = () => {
-  // useEffect(() => {
-  //   const ls_data =  JSON.parse(localStorage.getItem('Locations')) || [];
-  //   set_data(() => [...data, ls_data])
-  // }, [])
 
-  const [data, set_data] = useState([])
-  const CreateLocation = (event) => {
-    event.preventDefault()
 
-    const form_data = {
-      location: event.target.location.value,
-      minCustomers: event.target.min.value,
-      maxCustomers: event.target.max.value,
-      avgCookies: event.target.avg.value
-    }
-    set_data(() => [...data, form_data])
-    // localStorage.setItem('Locations', JSON.stringify(...data) );
-  }
-
+const CreateForm = ({CreateLocation}) => {
+  
   return (
     <>
       <form
@@ -43,16 +25,16 @@ const MAIN = () => {
           </div>
           <div className='flex-col w-1/2 text-center'>
             Average Cookies per Sale
-            <input type='number' name='avg' className='rounded-br-md' />
+            <input type='number'  step="any" name='avg' className='rounded-br-md' />
           </div>
           <button className='w-2/6' style={{ backgroundColor: '#15B981' }}>
             Create
           </button>
         </div>
       </form>
-      <LOC data={data} />
+
     </>
   )
 }
 
-export default MAIN
+export default CreateForm
