@@ -1,13 +1,23 @@
 
 
-const CreateForm = ({CreateLocation}) => {
-  
+const CreateForm = ({ onCreate }) => {
+    function handleSubmit(event) {
+      event.preventDefault();
+      const standInfo = {
+          location: event.target.location.value,
+          minimum_customers_per_hour: parseInt(event.target.min.value),
+          maximum_customers_per_hour: parseInt(event.target.max.value),
+          average_cookies_per_sale: parseFloat(event.target.avg.value),
+      }
+      onCreate(standInfo);
+      event.target.reset();
+  }
   return (
     <>
       <form
         className='p-2 mx-auto my-10 rounded-md'
         style={{ backgroundColor: '#6FE6B7' }}
-        onSubmit={CreateLocation}
+        onSubmit={handleSubmit}
       >
         <h1 className='my-6 text-2xl text-center'>Create Cookie Stand</h1>
         <div className='flex'>
