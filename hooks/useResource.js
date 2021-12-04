@@ -58,12 +58,14 @@ export default function useResource() {
 
   async function handleError(err) {
     console.error(err)
-    if (err.messages[0].message == 'Token is invalid or expired') {
-      const ref = jwt.decode(tokens.refresh)
-      const response = await axios.post(tokenRefreshURL, { ref })
-      tokens.access = response.data.access
+    if (err) {
+      if (err.response.status === 401) {
+        const ref = jwt.decode(tokens.refresh)
+        const response = await axios.post(tokenRefreshURL, { ref })
+        tokens.access = response.data.access
+      }
+      logout()
     }
-    logout()
   }
 
   return {

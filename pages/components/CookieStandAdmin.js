@@ -3,21 +3,17 @@ import CreateForm from './CookieStandAdmin/CreateForm'
 import Footer from './CookieStandAdmin/Footer'
 import Header from './CookieStandAdmin/Header'
 import ReportTable from './CookieStandAdmin/report/ReportTable'
-
-const CookieStandAdmin = ({ stands, loading, onCreate, onDelete }) => {
-  if (loading) return <p>Loading...</p>
+import Loading from './utils/Loading'
+const CookieStandAdmin = ({ stands, loading, onCreate, onDelete, logout }) => {
+  if (loading) return <Loading />
   return (
-    <>
-      <head>
-        <title>Cookie Stand Admin</title>
-      </head>
-      <main className='flex flex-col h-screen'>
-        <Header />
-        <CreateForm onCreate={onCreate} />
-        <ReportTable data={stands} onDelete={onDelete} />
-        <Footer data={stands} />
-      </main>
-    </>
+    <main className='flex flex-col h-screen'>
+      
+      <Header logout={logout} />
+      <CreateForm onCreate={onCreate} />
+      <ReportTable data={stands} onDelete={onDelete} />
+      <Footer data={stands} />
+    </main>
   )
 }
 
