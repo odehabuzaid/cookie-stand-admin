@@ -2,7 +2,7 @@
 
 
 ## Preview
-  [Cookie Stand Admin](https://cookie-stand-admin-f1aiurcuw-odehabuzaid.vercel.app/)
+  [Cookie Stand Admin](https://cookie-stand-admin-jnffz8td5-odehabuzaid.vercel.app/)
   
   username : admin
 
