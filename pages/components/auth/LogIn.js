@@ -1,23 +1,60 @@
 const Login = ({ login }) => {
   return (
-    <div className='h-screen p-4 text-center'>
-      <h2>Need to log in</h2>
-      <input type='text' id='username' placeholder='Username' />
-      <br />
-      <br />
-      <input type='password' id='password' placeholder='password' />
-      <br />
-      <button
-        onClick={() =>
-          login(
-            document.getElementById('username').value,
-            document.getElementById('password').value
-          )
-        }
-        className='p-2 text-white bg-gray-500 rounded'
-      >
-        Login
-      </button>
+    <div className='flex h-screen bg-green-100'>
+      <div className='w-full max-w-xs p-5 m-auto bg-green-500 rounded'>
+        <header>
+          <img
+            alt={'logo'}
+            className='w-20 mx-auto mb-5'
+            src='https://i.ibb.co/xYbY1s4/Press-Cookie-Logo-Icon-Bitten-Left-300x284.png'
+          />
+        </header>
+
+        <div>
+          <label className='block mb-2 ' htmlFor={'username'}>
+            Username
+          </label>
+          <input
+            className='w-full p-2 mb-6 border-b-2 border-green-300 outline-none focus:bg-gray-300'
+            type='text'
+            id='username'
+            placeholder='Username'
+          />
+        </div>
+        <div>
+          <label className='block mb-2 ' htmlFor={'password'}>
+            Password
+          </label>
+          <input
+            type='password'
+            id='password'
+            className='w-full p-2 mb-6 border-b-2 border-green-300 outline-none focus:bg-gray-300'
+            placeholder='password'
+          />
+        </div>
+        <div>
+          <button
+            onClick={() =>
+              login(
+                document.getElementById('username').value,
+                document.getElementById('password').value
+              )
+            }
+            className='w-full px-4 py-2 mb-6 font-bold text-white bg-green-200 rounded hover:bg-green-700'
+          >
+            Login
+          </button>
+        </div>
+
+        <footer className='flex'>
+          <a
+            className='float-right text-sm text-white hover:text-green-700'
+            href='https://cookie-stand-rest.herokuapp.com/admin'
+          >
+            Create Account
+          </a>
+        </footer>
+      </div>
     </div>
   )
 }
